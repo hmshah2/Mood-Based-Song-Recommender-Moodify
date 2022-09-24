@@ -13,7 +13,7 @@ Lisa Leung: ljleung2@illinois.edu
 
 Haley Shah:
 
-Libby Codaman:
+Libby Codamon: ecoda2@illinois.edu
 
 Mentor:
 
