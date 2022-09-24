@@ -9,7 +9,7 @@ Developers:
 
 Stuti Agrawal: stutia3@illinois.edu
 
-Lisa Heung:
+Lisa Leung: ljleung2@illinois.edu
 
 Haley Shah:
 
