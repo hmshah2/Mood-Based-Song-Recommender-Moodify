@@ -11,7 +11,7 @@ Stuti Agrawal: stutia3@illinois.edu
 
 Lisa Leung: ljleung2@illinois.edu
 
-Haley Shah:
+Haley Shah: hmshah2@illinois.edu
 
 Libby Codamon: ecoda2@illinois.edu
 
