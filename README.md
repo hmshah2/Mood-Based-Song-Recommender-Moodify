@@ -27,12 +27,12 @@ We are using a virtual environment for developing this project and to manage dep
 
 Windows:
 ```
-source static/Scripts/activate
+source venv/Scripts/activate
 ```
 
 Mac:
 ```
-source static/bin/activate
+source venv/bin/activate
 ```
 
 ## To start an instance of the Web App
