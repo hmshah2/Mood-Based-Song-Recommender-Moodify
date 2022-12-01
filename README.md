@@ -21,3 +21,30 @@ Ryan Ziegler:
 Front-end: React Framework
 
 Back-end: Python
+
+## Virtual environment 
+We are using a virtual environment for developing this project and to manage dependencies. To start the virtual environment run the following commands from the root directory:
+
+Windows:
+```
+source static/Scripts/activate
+```
+
+Mac:
+```
+source static/bin/activate
+```
+
+## To start an instance of the Web App
+
+for the first run:
+```
+cd static
+npm install
+```
+
+for subsequent runs:
+```
+cd static
+npm start
+```
