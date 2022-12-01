@@ -6,18 +6,25 @@ import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import AudioPlayer from 'material-ui-audio-player';
 
 function App() {
   const [showResult, setShowResult] = useState(false);
+  const muiTheme = createMuiTheme({});
 
   return (
-    <div className="App">
-      <h1> Mood-based Spotify song recommendations </h1>
-
-      <Container  maxWidth="sm">
-        <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+    <div className="App-body" align="center">
+      <header className="App-header">
+        <p align = "left">
+         CS222 PROJECT
+        </p>
+      </header>
+      <h1 color= "white">MOOD-BASED SONG RECOMMENDATIONS</h1>
+      <Container  maxWidth="sm" >
+        <Grid container>
         {showResult == false &&
-        <Grid item xs={6}>
+        <Grid item xs={"auto"}>
           <h2>What's the mood today?</h2>
           mood 1
           <Slider
@@ -25,6 +32,7 @@ function App() {
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
+            className="App-slider"
           />
 
           mood 2
@@ -33,6 +41,7 @@ function App() {
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
+            className="App-slider"
           />
 
           mood 3
@@ -41,6 +50,7 @@ function App() {
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
+            className="App-slider"
           />
 
           mood 4
@@ -49,6 +59,7 @@ function App() {
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
+            className="App-slider"
           />
 
           mood 5
@@ -57,6 +68,7 @@ function App() {
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
+            className="App-slider"
           />
           <Button variant="contained" color="success" onClick = {() => setShowResult(true)}>
             Done
@@ -64,8 +76,14 @@ function App() {
         </Grid>
 }
         {showResult == true &&
-        <Grid item xs={6}>
+        <Grid item xs={"auto"}>
           <h2>Here is your song for the day</h2>
+          
+
+          <ThemeProvider>
+            <AudioPlayer src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+          </ThemeProvider>;
+
           <Button variant="contained" color="success" onClick = {() => setShowResult(false)}>
             Back
           </Button>
@@ -73,20 +91,6 @@ function App() {
 }
       </Grid>
       </Container>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          What's the mood today?
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
       {/* <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
         <VolumeDown />
         <Slider aria-label="Volume" value={value} onChange={handleChange} />
