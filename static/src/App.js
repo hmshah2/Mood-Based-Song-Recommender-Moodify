@@ -12,7 +12,19 @@ import AudioPlayer from 'material-ui-audio-player';
 function App() {
   const [showResult, setShowResult] = useState(false);
   const muiTheme = createMuiTheme({});
-
+  
+  constructor(){ // constructs song name and album art
+    super();
+    const params = this.getHashParams();
+    const token = params.access_token;
+    if (token) {
+      spotifyApi.setAccessToken(token);
+    }
+    this.state = {
+      song: { name: 'Not Checked', albumArt: '' }
+    }
+  }
+  
   return (
     <div className="App-body" align="center">
       <header className="App-header">
@@ -79,6 +91,12 @@ function App() {
         <Grid item xs={"auto"}>
           <h2>Here is your song for the day</h2>
           
+          <div>
+            <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
+          </div>
+          <div>
+            {this.state.song.name}
+          </div>
 
           <ThemeProvider>
             <AudioPlayer src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
