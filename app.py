@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import tekore as tk
 import spotipy
+import webbrowser
 import numpy as np
 from tqdm import tqdm
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -123,6 +124,23 @@ if danceabilityval < 0:
     danceabilityval = 0.0
 
 
+def getArt(singer, spotify, song):
+  search = spotify.search(singer, 1, 0, "artist")
+  artist = search['artists']['total'][0]
+  artistID = artist['id']
+  
+  albums = spotify.artist_albums(artistID)
+  albums = albums['items']
+  for i in albums:
+    albumID = i['id']
+    art = i['images'][0]['url']
+
+    tracks = spotify.album_tracks(albumID)
+    tracks = tracks['items']
+    for j in tracks:
+      if (j['name'] is song):
+        return art
+
 print (df)
 def getSong(input, df):
     foundSong = False
@@ -134,6 +152,8 @@ def getSong(input, df):
         optimalDance = (df.loc[i].at["danceability"] > danceabilityval - 0.1 and df.loc[i].at["danceability"] <= danceabilityval + 0.1)
         if (optimalValence and optimalEnergy and optimalDance):
             foundSong = True
+            # art = getArt(f.loc[i].at["artist_name"], spotify, df.loc[i].at["track_name"])
+            # webbrowser.open(art)
             print(df.loc[i].at["artist_name"], end = "  - ")
             print(df.loc[i].at["track_name"], end = " ")
             print ("https://open.spotify.com/track/", end="")
@@ -148,6 +168,8 @@ def getSong(input, df):
             optimalDance = (df.loc[i].at["danceability"] > danceabilityval - 0.3 and df.loc[i].at["danceability"] <= danceabilityval + 0.3)
             if (optimalValence and optimalEnergy and optimalDance):
                 foundSong = True
+                # art = getArt(df.loc[i].at["artist_name"], spotify, df.loc[i].at["track_name"])
+                # webbrowser.open(art)
                 print(df.loc[i].at["artist_name"], end = " - ")
                 print(df.loc[i].at["track_name"], end = " ")
                 print ("https://open.spotify.com/track/", end="")
@@ -155,6 +177,8 @@ def getSong(input, df):
                 #print(df.loc[i].at["id"])
                 break
     if not foundSong:
+        # art = getArt("Rick Astley", spotify, "Never Gonna Give You Up")
+        # webbrowser.open(art)
         print("Rick Astley", end = " - ")
         print("Never Gonna Give You Up", end = " ")
         print("https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT")
