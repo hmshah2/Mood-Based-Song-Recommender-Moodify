@@ -92,7 +92,7 @@ function App() {
           <h2>Here is your song for the day</h2>
           
           <div>
-            <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
+            <img src={this.state.song.albumArt} style={{ height: 150 }}/>
           </div>
           <div>
             {this.state.song.name}
