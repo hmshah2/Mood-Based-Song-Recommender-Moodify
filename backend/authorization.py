@@ -55,7 +55,6 @@ for gender in tqdm(genres):
       data_dict["energy"].append(track_features.energy)
       data_dict["danceability"].append(track_features.danceability)
 
-
  
 # Store data in pandas dataframe
 df = pd.DataFrame(data_dict)
