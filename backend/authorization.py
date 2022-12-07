@@ -88,6 +88,24 @@ energyval = (moodvals[0] + moodvals[2]) / (float)(100);
 danceabilityval = moodvals[0] - moodvals[1] - (0.2*(moodvals[2])) - (0.2*(moodvals[4]));
 danceabilityval = danceabilityval / 50;
 
+def getArt(singer, spotify, song):
+  search = spotify.search(singer, 1, 0, "artist")
+  artist = search['artists']['total'][0]
+  artistID = artist['id']
+  
+  albums = spotify.artist_albums(artistID)
+  albums = albums['items']
+  for i in albums:
+    albumID = i['id']
+    art = i['images'][0]['url']
+
+    tracks = spotify.album_tracks(albumID)
+    tracks = tracks['items']
+    for j in tracks:
+      if (j['name'] is song):
+        return art
+
+
 
 def getSong(input, df, range):
   foundSong = false
@@ -99,6 +117,7 @@ def getSong(input, df, range):
         foundSong = true
         print(df.loc[i].at["artist_name"])
         print(df.loc[i].at["track_name"])
+        art = getArt(df.loc[i].at["artist_name"], spotify, df.loc[i].at["track_name"])
         break
 if not foundSong: #again with larger margins
   for i in 100:
@@ -109,9 +128,11 @@ if not foundSong: #again with larger margins
         foundSong = true
         print(df.loc[i].at["artist_name"])
         print(df.loc[i].at["track_name"])
+        art = getArt(df.loc[i].at["artist_name"], spotify, df.loc[i].at["track_name"])
         break
 #still no match?
 if not foundSong:
   print("Rick Astley")
   print("Never Gonna Give You Up")
+  art = ("Rick Astley", spotify, "Never Gonna Give You Up")
   #print(input, df)
