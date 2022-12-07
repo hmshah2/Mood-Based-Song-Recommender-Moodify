@@ -13,7 +13,7 @@ function App() {
   const [showResult, setShowResult] = useState(false);
   const muiTheme = createMuiTheme({});
   
-  constructor(){ // constructs song name and album art
+  constructor() { // constructs song name and album art
     super();
     const params = this.getHashParams();
     const token = params.access_token;
