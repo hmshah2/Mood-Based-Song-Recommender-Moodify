@@ -7,6 +7,8 @@ from tqdm import tqdm
 from spotipy.oauth2 import SpotifyClientCredentials
 
 import sys
+#from backend.authorization.py import authorization
+#course-project-group-26/backend/authorization.py
 import pandas as pd
 import time
 
@@ -175,6 +177,4 @@ def getSong(df, valenceval, energyval, danceabilityval):
         print("Never Gonna Give You Up", end = " ")
         return "https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT"
 
-# getSong(df)
 
-app.run(debug=True)

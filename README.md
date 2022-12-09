@@ -2,8 +2,7 @@
 course-project-group-26 created by GitHub Classroom
 # Mood-based-song-recommendation-system
 
-The Mood-Based Song Recommendation Web application will recommend a song based on the user's selection of their mood. The application will also act as a mood tracker, by
-displaying the mood and the song recommended in a calendar format.
+People experience all sorts of emotions throughout the day, and the Mood-Based Song Recommendation Web application strives to uplift or complement these feelings by recommending a song. The mood tracker web app allows people to be more in touch with their emotions and how they feel on a day-to-day basis by offering users a new song to listen to that reflects their mood of the day. 
 
 Developers:
 
@@ -15,9 +14,7 @@ Haley Shah: hmshah2@illinois.edu
 
 Libby Codamon: ecoda2@illinois.edu
 
-Mentor:
-
-Ryan Ziegler: 
+Mentor: Ryan Ziegler
 
 Front-end: React Framework
 
@@ -28,12 +25,12 @@ We are using a virtual environment for developing this project and to manage dep
 
 Windows:
 ```
-source static/Scripts/activate
+source venv/Scripts/activate
 ```
 
 Mac:
 ```
-source static/bin/activate
+source venv/bin/activate
 ```
 
 ## To start an instance of the Web App
