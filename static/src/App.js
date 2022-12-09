@@ -1,17 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-// import Slider from '@mui/material/Slider';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
-import AudioPlayer from 'material-ui-audio-player';
+import axios from 'axios';
+import ReactPlayer from "react-player";
 
 function App() {
   const [showResult, setShowResult] = useState(false);
-  const muiTheme = createMuiTheme({});
+  const [happyValue, setHappyValue] = useState(50);
+  const [sadValue, setSadValue] = useState(50);
+  const [angryValue, setAngryValue] = useState(50);
+  const [romanticValue, setRomanticValue] = useState(50);
+  const [anxiousValue, setAnxiousValue] = useState(50);
+  const [songLink, setSongLink] = useState("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
 
   return (
     <div className="App-body" align="center">
@@ -23,67 +27,89 @@ function App() {
       <h1 color= "white">MOOD-BASED SONG RECOMMENDATIONS</h1>
       <Container  maxWidth="sm" >
         <Grid container>
-        {showResult == false &&
+        {showResult === false &&
         <Grid item xs={"auto"}>
           <h2>What's the mood today?</h2>
-          mood 1
+          Happy
           <Slider
             size="small"
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
+            onChange={(e) => setHappyValue(e.target.value)}
           />
 
-          mood 2
+          Sad
           <Slider
             size="small"
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
+            onChange={(e) => setSadValue(e.target.value)}
           />
 
-          mood 3
+          Angry
           <Slider
             size="small"
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
+            onChange={(e) => setAngryValue(e.target.value)}
           />
 
-          mood 4
+          Romantic
           <Slider
             size="small"
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
+            onChange={(e) => setRomanticValue(e.target.value)}
           />
 
-          mood 5
+          Anxious
           <Slider
             size="small"
             defaultValue={50}
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
+            onChange={(e) => setAnxiousValue(e.target.value)}
           />
-          <Button variant="contained" color="success" onClick = {() => setShowResult(true)}>
+          <Button variant="contained" color="success" onClick = {async () => { setShowResult(true);
+          const moods = {"happyValue":happyValue, "sadValue": sadValue, "angryValue":angryValue, "romanticValue":romanticValue, "anxiousValue":anxiousValue };
+          console.log(JSON.stringify(moods));
+          let headerData = new Headers();
+          headerData.append('Accept', '*');
+          headerData.append("Access-Control-Allow", "*");
+          headerData.append('Content-Type', 'application/json');
+          headerData.append('Access-Control-Allow-Origin', '*');
+          headerData.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+          headerData.append("Access-Control-Allow-Headers", "*");
+          const response = await axios.post(
+            'http://127.0.0.1:5000/',
+            {"happyValue":happyValue, "sadValue": sadValue, "angryValue":angryValue, "romanticValue":romanticValue, "anxiousValue":anxiousValue },
+            { headers: headerData }
+          );
+          
+          console.log(response);
+          setSongLink(response.data);
+          if (response.ok) {
+            console.log("response worked!");
+          }
+         }} >
             Done
           </Button>
         </Grid>
 }
-        {showResult == true &&
+        {showResult === true &&
         <Grid item xs={"auto"}>
-          <h2>Here is your song for the day</h2>
-          
-
-          <ThemeProvider>
-            <AudioPlayer src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
-          </ThemeProvider>;
-
+          <h2 >Here is your song for the day</h2>
+          <h2><a href={songLink}>Visit Spotify</a></h2>
+          <ReactPlayer url="https://www.youtube.com/watch?v=jPDKi-i618U" />
           <Button variant="contained" color="success" onClick = {() => setShowResult(false)}>
             Back
           </Button>
@@ -91,22 +117,6 @@ function App() {
 }
       </Grid>
       </Container>
-      {/* <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-        <VolumeDown />
-        <Slider aria-label="Volume" value={value} onChange={handleChange} />
-        <VolumeUp />
-      </Stack> */}
-      {/* <Slider disabled defaultValue={30} aria-label="Disabled slider" /> */}
-      {/* <Slider
-        aria-label="Small steps"
-        defaultValue={0.00000005}
-        getAriaValueText={"valuetext"}
-        step={0.00000001}
-        marks
-        min={-0.00000005}
-        max={0.0000001}
-        valueLabelDisplay="auto"
-      /> */}
     </div>
   );
 }

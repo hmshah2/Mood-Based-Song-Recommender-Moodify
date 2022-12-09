@@ -27,6 +27,10 @@
 
 .App-slider {
   color: #e27d60;
+  /* size: "small";
+  defaultValue: {50};
+  aria-label: "Small";
+  valueLabelDisplay: "auto"; */
 }
 
 @keyframes App-logo-spin {
