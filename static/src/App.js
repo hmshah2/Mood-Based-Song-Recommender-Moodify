@@ -8,13 +8,14 @@ import axios from 'axios';
 import ReactPlayer from "react-player";
 
 function App() {
-  const [showResult, setShowResult] = useState(false);
-  const [happyValue, setHappyValue] = useState(50);
-  const [sadValue, setSadValue] = useState(50);
-  const [angryValue, setAngryValue] = useState(50);
-  const [romanticValue, setRomanticValue] = useState(50);
-  const [anxiousValue, setAnxiousValue] = useState(50);
-  const [songLink, setSongLink] = useState("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+  // setting default values of state variables
+  const [_show_result, set_show_result] = useState(false);
+  const [_happy_value, set_happy_value] = useState(50);
+  const [_sad_value, set_sad_value] = useState(50);
+  const [_angry_value, set_angry_value] = useState(50);
+  const [_romantic_value, set_romantic_value] = useState(50);
+  const [_anxious_value, set_anxious_value] = useState(50);
+  const [_song_link, set_song_link] = useState("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
 
   return (
     <div className="App-body" align="center">
@@ -23,12 +24,14 @@ function App() {
          CS222 PROJECT
         </p>
       </header>
+      
       <h1 color= "white">MOOD-BASED SONG RECOMMENDATIONS</h1>
+      
       <Container  maxWidth="sm" >
         <Grid container>
-        {showResult === false &&
+        {_show_result === false &&
         <Grid item xs={"auto"}>
-          <h2>What's the mood today?</h2>
+          <h2>What's the mood today?</h2> 
           Happy
           <Slider
             size="small"
@@ -36,7 +39,7 @@ function App() {
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
-            onChange={(e) => setHappyValue(e.target.value)}
+            onChange={(e) => set_happy_value(e.target.value)}
           />
           Sad
           <Slider
@@ -45,7 +48,7 @@ function App() {
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
-            onChange={(e) => setSadValue(e.target.value)}
+            onChange={(e) => set_sad_value(e.target.value)}
           />
           Angry
           <Slider
@@ -54,7 +57,7 @@ function App() {
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
-            onChange={(e) => setAngryValue(e.target.value)}
+            onChange={(e) => set_angry_value(e.target.value)}
           />
           Romantic
           <Slider
@@ -63,7 +66,7 @@ function App() {
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
-            onChange={(e) => setRomanticValue(e.target.value)}
+            onChange={(e) => set_romantic_value(e.target.value)}
           />
           Anxious
           <Slider
@@ -72,13 +75,12 @@ function App() {
             aria-label="Small"
             valueLabelDisplay="auto"
             className="App-slider"
-            onChange={(e) => setAnxiousValue(e.target.value)}
+            onChange={(e) => set_anxious_value(e.target.value)}
           />
-          <Button variant="contained" color="success" onClick = {async () => { setShowResult(true);
-          const moods = {"happyValue":happyValue, "sadValue": sadValue, "angryValue":angryValue, "romanticValue":romanticValue, "anxiousValue":anxiousValue };
-          console.log(JSON.stringify(moods));
+          <Button variant="contained" color="success" onClick = {async () => { set_show_result(true);
+          const moods = {"_happy_value":_happy_value, "_sad_value": _sad_value, "_angry_value":_angry_value, "_romantic_value":_romantic_value, "_anxious_value":_anxious_value };
           let headerData = new Headers();
-          headerData.append('Accept', '*');
+          headerData.append('Accept', '*'); // CORS permissions
           headerData.append("Access-Control-Allow", "*");
           headerData.append('Content-Type', 'application/json');
           headerData.append('Access-Control-Allow-Origin', '*');
@@ -86,12 +88,11 @@ function App() {
           headerData.append("Access-Control-Allow-Headers", "*");
           const response = await axios.post(
             'http://127.0.0.1:5000/',
-            {"happyValue":happyValue, "sadValue": sadValue, "angryValue":angryValue, "romanticValue":romanticValue, "anxiousValue":anxiousValue },
+            {"_happy_value":_happy_value, "_sad_value": _sad_value, "_angry_value":_angry_value, "_romantic_value":_romantic_value, "_anxious_value":_anxious_value },
             { headers: headerData }
           );
-          
-          console.log(response);
-          setSongLink(response.data);
+          console.log(response.data);
+          set_song_link(response.data); // connecting the FLASK API to the React Frontend
           if (response.ok) {
             console.log("response worked!");
           }
@@ -100,12 +101,12 @@ function App() {
           </Button>
         </Grid>
 }
-        {showResult === true &&
+        {_show_result === true &&
         <Grid item xs={"auto"}>
           <h2 >Here is your song for the day</h2>
-          <h2><a href={songLink}>Visit Spotify</a></h2>
+          <h3><a href={_song_link}>Visit Spotify</a></h3>
           <ReactPlayer url="https://www.youtube.com/watch?v=jPDKi-i618U" />
-          <Button variant="contained" color="success" onClick = {() => setShowResult(false)}>
+          <Button variant="contained" color="success" onClick = {() => set_show_result(false)}>
             Back
           </Button>
         </Grid>
