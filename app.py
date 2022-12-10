@@ -71,8 +71,12 @@ def mood_values():
 
     #mood 1 = happy, mood 2 = sad, mood 3 = angry, mood 4 = romantic, mood 5 = anxious
 
-    #REPLACE MOODVALS W/ ACTUAL VALS FROM WEBSITE
+    #Obtain values from website
     moods = [ mood_values_["happy_value"], mood_values_["sad_value"], mood_values_["angry_value"], mood_values_["romantic_value"], mood_values_["anxious_value"]]
+    #Scale down to 50 (originally slider only went to 50, new slider goes to 100)
+    for i in moods:
+      i = (i / (float)(100)) * 50
+      
     moodvals = np.array(moods)
 
     # valence = 1.0 correlates with happiness and positve emotions, 0.0 correlates with negative emotions
