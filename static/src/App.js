@@ -9,14 +9,35 @@ import ReactPlayer from "react-player";
 
 function App() {
   // setting default values of state variables
-  const [_show_result, set_show_result] = useState(false);
-  const [_happy_value, set_happy_value] = useState(50);
-  const [_sad_value, set_sad_value] = useState(50);
-  const [_angry_value, set_angry_value] = useState(50);
-  const [_romantic_value, set_romantic_value] = useState(50);
-  const [_anxious_value, set_anxious_value] = useState(50);
-  const [_song_link, set_song_link] = useState("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+  const [show_result, set_show_result] = useState(false);
+  const [happy_value, set_happy_value] = useState(50);
+  const [sad_value, set_sad_value] = useState(50);
+  const [angry_value, set_angry_value] = useState(50);
+  const [romantic_value, set_romantic_value] = useState(50);
+  const [anxious_value, set_anxious_value] = useState(50);
+  const [song_link, set_song_link] = useState("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
 
+  function handleOnClick() { 
+    async () => { set_show_result(true);
+    const moods = {"happy_value":happy_value, "sad_value": sad_value, "angry_value":angry_value, "romantic_value":romantic_value, "anxious_value":anxious_value };
+    let headerData = new Headers();
+    headerData.append('Accept', '*'); // CORS permissions
+    headerData.append("Access-Control-Allow", "*");
+    headerData.append('Content-Type', 'application/json');
+    headerData.append('Access-Control-Allow-Origin', '*');
+    headerData.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    headerData.append("Access-Control-Allow-Headers", "*");
+    const response = await axios.post(
+      'http://127.0.0.1:5000/',
+      {"happy_value":happy_value, "sad_value": sad_value, "angry_value":angry_value, "romantic_value":romantic_value, "anxious_value":anxious_value },
+      { headers: headerData }
+    );
+    set_song_link(response.data); // connecting the FLASK API to the React Frontend
+    if (response.ok) {
+      console.log("response worked!");
+    }
+   }
+  } 
  
   return (
     <div className="App-body" align="center">
@@ -26,11 +47,11 @@ function App() {
         </p>
       </header>
       
-      <h1 color= "white">MOOD-BASED SONG RECOMMENDATIONS</h1>
+      <h1 color="white">MOOD-BASED SONG RECOMMENDATIONS</h1>
       
       <Container  maxWidth="sm" >
         <Grid container>
-        {_show_result === false &&
+        {show_result === false &&
         <Grid item xs={"auto"}>
           <h2>What's the mood today?</h2> 
           Happy
@@ -78,36 +99,17 @@ function App() {
             className="App-slider"
             onChange={(e) => set_anxious_value(e.target.value)}
           />
-          <Button variant="contained" color="success" onClick = {async () => { set_show_result(true);
-          const moods = {"_happy_value":_happy_value, "_sad_value": _sad_value, "_angry_value":_angry_value, "_romantic_value":_romantic_value, "_anxious_value":_anxious_value };
-          let headerData = new Headers();
-          headerData.append('Accept', '*'); // CORS permissions
-          headerData.append("Access-Control-Allow", "*");
-          headerData.append('Content-Type', 'application/json');
-          headerData.append('Access-Control-Allow-Origin', '*');
-          headerData.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-          headerData.append("Access-Control-Allow-Headers", "*");
-          const response = await axios.post(
-            'http://127.0.0.1:5000/',
-            {"_happy_value":_happy_value, "_sad_value": _sad_value, "_angry_value":_angry_value, "_romantic_value":_romantic_value, "_anxious_value":_anxious_value },
-            { headers: headerData }
-          );
-          console.log(response.data);
-          set_song_link(response.data); // connecting the FLASK API to the React Frontend
-          if (response.ok) {
-            console.log("response worked!");
-          }
-         }} >
+          <Button variant="contained" color="success" onClick = {handleOnClick} >
             Done
           </Button>
         </Grid>
 }
-        {_show_result === true &&
+        {show_result === true &&
         <Grid item xs={"auto"}>
           <h2 >Here is your song for the day</h2>
-          <h3><a href={_song_link}>Visit Spotify</a></h3>
+          <h3><a href={song_link}>Visit Spotify</a></h3>
           <ReactPlayer url="https://www.youtube.com/watch?v=jPDKi-i618U" />
-          <Button variant="contained" color="success" onClick = {() => set_show_result(false)}>
+          <Button variant="contained" color="success" onClick={() => set_show_result(false)}>
             Back
           </Button>
         </Grid>

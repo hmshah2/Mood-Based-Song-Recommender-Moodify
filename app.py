@@ -25,11 +25,11 @@ def mood_values():
     # moods dict stores the values of different moods that the user inputs
     moods_dict = {}
     mood_values_ = request.get_json()
-    moods_dict["_happy_value"] = mood_values_["_happy_value"]
-    moods_dict["_sad_value"] = mood_values_["_sad_value"]
-    moods_dict["_angry_value"] = mood_values_["_angry_value"]
-    moods_dict["_romantic_value"] = mood_values_["_romantic_value"]
-    moods_dict["_anxious_value"] = mood_values_["_anxious_value"]
+    moods_dict["happy_value"] = mood_values_["happy_value"]
+    moods_dict["sad_value"] = mood_values_["sad_value"]
+    moods_dict["angry_value"] = mood_values_["angry_value"]
+    moods_dict["romantic_value"] = mood_values_["romantic_value"]
+    moods_dict["anxious_value"] = mood_values_["anxious_value"]
     
     # lets authorize and retrieve spotify object
     spotify = auth()
@@ -72,7 +72,7 @@ def mood_values():
     #mood 1 = happy, mood 2 = sad, mood 3 = angry, mood 4 = romantic, mood 5 = anxious
 
     #REPLACE MOODVALS W/ ACTUAL VALS FROM WEBSITE
-    moods = [ mood_values_["_happy_value"], mood_values_["_sad_value"], mood_values_["_angry_value"], mood_values_["_romantic_value"], mood_values_["_anxious_value"]]
+    moods = [ mood_values_["happy_value"], mood_values_["sad_value"], mood_values_["angry_value"], mood_values_["romantic_value"], mood_values_["anxious_value"]]
     moodvals = np.array(moods)
 
     # valence = 1.0 correlates with happiness and positve emotions, 0.0 correlates with negative emotions
