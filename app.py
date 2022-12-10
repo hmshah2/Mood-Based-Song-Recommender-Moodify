@@ -1,37 +1,29 @@
 from flask import Flask, render_template, request
-import tekore as tk
 import spotipy
-import webbrowser
 import numpy as np
+import pandas as pd
+import tekore as tk
 from tqdm import tqdm
+from flask_cors import CORS, cross_origin
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 import spotipy.util as util
-
-import sys
-#from backend.authorization.py import authorization
-#course-project-group-26/backend/authorization.py
-import pandas as pd
-import time
 
 # ===============================================
 # app.py
 # ------------
 # reads json data to send to viewer
 # ===============================================
-from flask_cors import CORS, cross_origin
+
+# creating a Flask app
 app = Flask(__name__, static_folder='./static', template_folder='./static')
 
-# app.config['CORS_HEADERS'] = 'Content-Type'
-
-
 @app.route('/', methods = ['POST'])
-@cross_origin("http://localhost:3000")
+@cross_origin("http://localhost:3000") # CORS access
+
 def mood_values():
-    moods_dict = {}
-    # print(request.get_json()['happyValue'])
+    moods_dict = {} # moods dict 
     mood_values_ = request.get_json()
-    print(request.get_json()["happyValue"])
     moods_dict["happy_value"] = mood_values_["happyValue"]
     moods_dict["sad_value"] = mood_values_["sadValue"]
     moods_dict["angry_value"] = mood_values_["angryValue"]
