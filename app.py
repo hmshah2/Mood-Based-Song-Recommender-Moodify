@@ -8,6 +8,7 @@ from flask_cors import CORS, cross_origin
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 import spotipy.util as util
+import ast
 
 # ===============================================
 # app.py
@@ -50,7 +51,8 @@ def mood_values():
     for gender in tqdm(genrez):
         
         recs = spotify.recommendations(genres = [gender], limit = 7)
-        recs = eval(recs.json().replace("null", "-999").replace("false", "False").replace("true", "True"))["tracks"]
+        #changed from eval for security issues
+        recs = ast.literal_eval(recs.json().replace("null", "-999").replace("false", "False").replace("true", "True"))["tracks"]
     
     for track in recs:
         data_dict["id"].append(track["id"])
