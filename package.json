@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"name":"test","date":"9/24/2022","dependencies":{"axios":"^1.2.1","create-react-app":"^1.2.1","flask":"^0.2.10"}}
+=======
+{"name":"test","date":"9/24/2022","dependencies":{"create-react-app":"^1.2.1","flask":"^0.2.10","react-player":"^2.11.0"}}
+>>>>>>> 455a5a144e0804b1285e0ab756c184658e7bd782
