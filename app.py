@@ -5,6 +5,8 @@ import webbrowser
 import numpy as np
 from tqdm import tqdm
 from spotipy.oauth2 import SpotifyClientCredentials
+import os
+import spotipy.util as util
 
 import sys
 #from backend.authorization.py import authorization
