@@ -31,7 +31,6 @@ def mood_values():
     moods_dict["romantic_value"] = mood_values_["romantic_value"]
     moods_dict["anxious_value"] = mood_values_["anxious_value"]
     
-    # lets authorize and retrieve spotify object
     spotify = auth()
     genres = spotify.recommendation_genre_seeds()
     data_dict = {
@@ -101,7 +100,7 @@ def mood_values():
     danceabilityval = danceabilityval - (moodvals[1] * 0.0025) - (moodvals[2] * 0.005) - (moodvals[4] * 0.0025)
     if danceabilityval < 0:
         danceabilityval = 0.0
-    return getSong(df, valenceval, energyval, danceabilityval)
+    return get_song(df, valenceval, energyval, danceabilityval)
 
 
 def auth():
@@ -115,7 +114,7 @@ client_secret = "d787de6d91b2409b9a68467558c5f7fb"
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager) #spotify object to access API
 
-def getSong(df, valenceval, energyval, danceabilityval):
+def get_song(df, valenceval, energyval, danceabilityval):
     foundSong = False
     for i in range(6):
         optimalValence = (df.loc[i].at["valence"] > valenceval - 0.1 and df.loc[i].at["valence"] <= valenceval + 0.1)
@@ -145,5 +144,38 @@ def getSong(df, valenceval, energyval, danceabilityval):
         print("Rick Astley", end = " - ")
         print("Never Gonna Give You Up", end = " ")
         return "https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT"
+
+def get_data_dict() :
+    spotify = auth()
+    genres = spotify.recommendation_genre_seeds()
+    data_dict = {
+    "id":[], 
+    "track_name":[], 
+    "artist_name":[],
+    "valence":[],     
+    "energy":[],      
+    "danceability": []
+    }
+    
+    # choose only genres for pop, hiphop, chill, indiepop, indie, rock, and sad, respectively
+    genrez = [genres[86], genres[52], genres[16], genres[58], genres[59], genres[99], genres[103]]
+    
+    # Get recommendation for each genre
+    for gender in tqdm(genrez):
+        
+        recs = spotify.recommendations(genres = [gender], limit = 7)
+        recs = eval(recs.json().replace("null", "-999").replace("false", "False").replace("true", "True"))["tracks"]
+    
+    for track in recs:
+        data_dict["id"].append(track["id"])
+        track_meta = spotify.track(track["id"])
+        data_dict["track_name"].append(track_meta.name)
+        data_dict["artist_name"].append(track_meta.album.artists[0].name)
+        track_features = sp.audio_features(track["id"])
+        data_dict["valence"].append(track_features[0]['valence'])
+        data_dict["energy"].append(track_features[0]['energy'])
+        data_dict["danceability"].append(track_features[0]['danceability'])
+
+    return data_dict
 
 app.run(debug=True)

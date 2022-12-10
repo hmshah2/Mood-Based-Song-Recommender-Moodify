@@ -17,8 +17,8 @@ function App() {
   const [anxious_value, set_anxious_value] = useState(50);
   const [song_link, set_song_link] = useState("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
 
-  function handleOnClick() { 
-    async () => { set_show_result(true);
+  async function handleOnClick() { 
+    set_show_result(true);
     const moods = {"happy_value":happy_value, "sad_value": sad_value, "angry_value":angry_value, "romantic_value":romantic_value, "anxious_value":anxious_value };
     let headerData = new Headers();
     headerData.append('Accept', '*'); // CORS permissions
@@ -36,8 +36,8 @@ function App() {
     if (response.ok) {
       console.log("response worked!");
     }
-   }
-  } 
+  }
+  
  
   return (
     <div className="App-body" align="center">
