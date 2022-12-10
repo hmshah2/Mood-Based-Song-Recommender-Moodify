@@ -25,13 +25,6 @@ app = Flask(__name__, static_folder='./static', template_folder='./static')
 def homepage():
     return render_template('index.html')
 
-<<<<<<< HEAD
-# backend function and connect to api
-# switching to temp branch
-
-
-
-=======
 # import SPOTIPY_CLIENT_ID = '983bdba20e524ca997c58d8250b088d9'
 # import SPOTIPY_CLIENT_SECRET='d787de6d91b2409b9a68467558c5f7fb'
 #export SPOTIPY_REDIRECT_URI='your-app-redirect-url'
@@ -191,4 +184,3 @@ def getSong(input, df):
         print("https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT")
 
 getSong(input, df)
->>>>>>> 0a422431b74a95ab17a775feb5ba114c8599d5c8
