@@ -4,7 +4,7 @@ course-project-group-26 created by GitHub Classroom
 
 People experience all sorts of emotions throughout the day, and the Mood-Based Song Recommendation Web application "Moodify" strives to uplift or complement these feelings by recommending a song. Users are able to use sliders to increase or decrease the levels of happiness, sadness, anger, romance, and anxiety they feel that day. In return, they will receive a song, artist, and link/URL from our music library that was calculated from the average of the emotional values, with the heaviest emphasis on happiness and sadness. The mood tracker web app allows people to be more in touch with their emotions and how they feel on a day-to-day basis by offering users a new song to listen to that reflects their mood of the day. 
 
-Developers:
+Developers:q
 
 Stuti Agrawal: stutia3@illinois.edu
 
