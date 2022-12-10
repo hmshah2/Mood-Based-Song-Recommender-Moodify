@@ -6,6 +6,8 @@ import tekore as tk
 from tqdm import tqdm
 from flask_cors import CORS, cross_origin
 from spotipy.oauth2 import SpotifyClientCredentials
+import os
+import spotipy.util as util
 
 # ===============================================
 # app.py
