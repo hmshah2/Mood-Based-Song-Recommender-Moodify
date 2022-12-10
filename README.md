@@ -20,9 +20,9 @@ Front-end: React Framework
 
 Back-end: Python
 
-# Technical Architecure
+# Technical Architecture
 
-Backend:
+Backend (Haley, Lisa, Libby):
 The backend was done completely in python using the spotipy library which is a lightweight version of the spotify api.
 
 We took a secret id and client id credentials from the spotify developers page. These credentials were used to authorize and create a spotify object. From this, we took a recommendation of genres, selected a select few genres- the ones that are most popular nowadays. Then we find recommendations for each of the genres, add the data for each into a dictionary which we converted into a pandas dataframe then into a csv for easy accessibility throughout our code.
@@ -42,7 +42,7 @@ Then, we search through the data csv for a song that has these values and it wil
 3. Finally, if the values combined are inconclusive and a song cannot be found in our library, then the song “Never Gonna Give You Up” by Rick Astley will be outputted with a link/URL.
 
 
-Frontend:
+Frontend (Stuti):
 Users are able to use sliders to increase/decrease on 5 emotions (happy, sad, angry, romantic, anxious) to display what levels of each they are feeling that day. The data that is submitted by the user is then sent to the backend which finds a song and sends it back to the frontend which displays a song, artist, and link/URL. We have also included a video on the final screen about the correlation between music and moods/feelings as the inspiration for our course project. 
 
 
