@@ -6,6 +6,8 @@ import tekore as tk
 from tqdm import tqdm
 from flask_cors import CORS, cross_origin
 from spotipy.oauth2 import SpotifyClientCredentials
+import os
+import spotipy.util as util
 
 # ===============================================
 # app.py
@@ -169,6 +171,4 @@ def getSong(df, valenceval, energyval, danceabilityval):
         print("Never Gonna Give You Up", end = " ")
         return "https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT"
 
-# getSong(df)
 
-app.run(debug=True)
