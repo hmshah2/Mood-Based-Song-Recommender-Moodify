@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import axios from 'axios';
 import ReactPlayer from "react-player";
 
@@ -39,7 +38,6 @@ function App() {
             className="App-slider"
             onChange={(e) => setHappyValue(e.target.value)}
           />
-
           Sad
           <Slider
             size="small"
@@ -49,7 +47,6 @@ function App() {
             className="App-slider"
             onChange={(e) => setSadValue(e.target.value)}
           />
-
           Angry
           <Slider
             size="small"
@@ -59,7 +56,6 @@ function App() {
             className="App-slider"
             onChange={(e) => setAngryValue(e.target.value)}
           />
-
           Romantic
           <Slider
             size="small"
@@ -69,7 +65,6 @@ function App() {
             className="App-slider"
             onChange={(e) => setRomanticValue(e.target.value)}
           />
-
           Anxious
           <Slider
             size="small"
